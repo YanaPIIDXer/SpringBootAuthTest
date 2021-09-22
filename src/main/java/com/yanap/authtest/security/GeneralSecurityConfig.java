@@ -18,6 +18,10 @@ public class GeneralSecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.antMatcher("/general/**")
+            .authorizeRequests()
+            .antMatchers("/gernal/**").hasRole("GERNAL");
+
         http.antMatcher("/login/general/**")
             .formLogin()
             .loginPage("/login/general/auth").permitAll()
@@ -26,12 +30,7 @@ public class GeneralSecurityConfig extends WebSecurityConfigurerAdapter {
             .defaultSuccessUrl("/general")
             .usernameParameter("name")
             .passwordParameter("password");
-
-        http.antMatcher("/general")
-            .authorizeRequests()
-            .antMatchers("/gernal").hasRole("GERNAL")
-            .anyRequest().authenticated();
-
+            
         http.antMatcher("/**")
             .logout()
             .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

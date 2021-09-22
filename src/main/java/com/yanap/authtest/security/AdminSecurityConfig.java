@@ -17,6 +17,10 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.antMatcher("/admin/**")
+            .authorizeRequests()
+            .antMatchers("/admin/**").hasRole("ADMIN");
+
         http.antMatcher("/login/admin/**")
             .formLogin()
             .loginPage("/login/admin/auth").permitAll()
@@ -25,11 +29,6 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
             .defaultSuccessUrl("/admin")
             .usernameParameter("name")
             .passwordParameter("password");
-
-        http.antMatcher("/admin")
-            .authorizeRequests()
-            .antMatchers("/admin").hasRole("ADMIN")
-            .anyRequest().authenticated();
     }
     
     @Override
