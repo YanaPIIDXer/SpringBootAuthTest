@@ -10,9 +10,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-@Order(1)
+@Order(2)
 @EnableWebSecurity
-public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
+public class GeneralSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserService userService;
     
@@ -20,14 +20,14 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
             .antMatchers("/", "/login/**").permitAll()
-            .antMatchers("/admin").hasRole("ADMIN")
+            .antMatchers("/gernal").hasRole("GERNAL")
             .anyRequest().authenticated();
 
         http.formLogin()
-            .loginPage("/login/admin")
-            .loginProcessingUrl("/login/admin/auth")
+            .loginPage("/login/general")
+            .loginProcessingUrl("/login/general/auth")
             .failureUrl("/")
-            .defaultSuccessUrl("/admin")
+            .defaultSuccessUrl("/general")
             .usernameParameter("name")
             .passwordParameter("password");
 
@@ -39,5 +39,5 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService);
-    }
+    }    
 }
