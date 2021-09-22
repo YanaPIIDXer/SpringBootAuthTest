@@ -1,0 +1,14 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:include="parts/header">
+    </head>
+
+    <body>
+        <h1>一般ログイン</h1>
+        <hr />
+        <form th:action="@{/general/login/auth}" method="POST">
+            <input type="hidden" name="name" value="admin" />
+            <input type="hidden" name="password" value="admin" />
+            <input type="submit" value="一般ユーザとしてログイン" />
+        </form>
+    </body>
+</html>
