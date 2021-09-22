@@ -20,7 +20,7 @@ public class GeneralSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.antMatcher("/general/**")
             .authorizeRequests()
-            .antMatchers("/gernal/**").hasRole("GERNAL");
+            .antMatchers("/general/**").hasRole("GENERAL");
 
         http.antMatcher("/login/general/**")
             .formLogin()
