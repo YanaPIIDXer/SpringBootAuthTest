@@ -10,7 +10,7 @@ public class AdminController {
         return "admin/index";
     }
 
-    @RequestMapping("/admin/login")
+    @RequestMapping("/login/admin")
     public String login() {
         return "admin/login";
     }

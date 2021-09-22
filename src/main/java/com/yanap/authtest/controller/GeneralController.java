@@ -10,7 +10,7 @@ public class GeneralController {
         return "general/index";
     }
 
-    @RequestMapping("/general/login")
+    @RequestMapping("/login/general")
     public String login() {
         return "general/login";
     }
