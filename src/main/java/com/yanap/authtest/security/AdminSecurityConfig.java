@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Order(1)
 @EnableWebSecurity
@@ -18,22 +17,19 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-            .antMatchers("/", "/login/**").permitAll()
-            .antMatchers("/admin").hasRole("ADMIN")
-            .anyRequest().authenticated();
-
-        http.formLogin()
-            .loginPage("/login/admin")
-            .loginProcessingUrl("/login/admin/auth")
+        http.antMatcher("/login/admin/**")
+            .formLogin()
+            .loginPage("/login/admin/auth").permitAll()
+            .loginProcessingUrl("/login/admin/process")
             .failureUrl("/")
             .defaultSuccessUrl("/admin")
             .usernameParameter("name")
             .passwordParameter("password");
 
-        http.logout()
-            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-            .logoutSuccessUrl("/");
+        http.antMatcher("/admin")
+            .authorizeRequests()
+            .antMatchers("/admin").hasRole("ADMIN")
+            .anyRequest().authenticated();
     }
     
     @Override
