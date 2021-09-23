@@ -13,7 +13,7 @@ public class AdminController {
         return "admin/index";
     }
 
-    @RequestMapping("/login/admin/auth")
+    @RequestMapping("/login/admin")
     public String login(Model model) {
         model.addAttribute("request", new UserRequest());
         return "admin/login";

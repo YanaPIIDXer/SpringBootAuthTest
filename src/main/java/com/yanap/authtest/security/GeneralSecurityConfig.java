@@ -26,7 +26,7 @@ public class GeneralSecurityConfig extends WebSecurityConfigurerAdapter {
                     .anyRequest().authenticated()
         .and()
             .formLogin()
-                .loginPage("/login/general/auth")
+                .loginPage("/login/general")
                 .loginProcessingUrl("/login/process")
                 .defaultSuccessUrl("/general")
                 .failureUrl("/")
