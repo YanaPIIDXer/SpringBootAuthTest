@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Order(1)
 @EnableWebSecurity
@@ -19,16 +20,21 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.antMatcher("/admin/**")
             .authorizeRequests()
-            .antMatchers("/admin/**").hasRole("ADMIN");
-
-        http.antMatcher("/login/admin/**")
+            .antMatchers("/admin/**").hasRole("ADMIN")
+        .and()
             .formLogin()
-            .loginPage("/login/admin/auth").permitAll()
+            .loginPage("/login/admin/auth")
             .loginProcessingUrl("/login/admin/process")
             .failureUrl("/")
             .defaultSuccessUrl("/admin")
             .usernameParameter("name")
-            .passwordParameter("password");
+            .passwordParameter("password")
+        .and()
+            .logout()
+            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+            .logoutSuccessUrl("/")
+        .and()
+            .csrf().disable();
     }
     
     @Override

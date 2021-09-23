@@ -20,21 +20,22 @@ public class GeneralSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.antMatcher("/general/**")
             .authorizeRequests()
-            .antMatchers("/general/**").hasRole("GENERAL");
-
-        http.antMatcher("/login/general/**")
+            .antMatchers("/general/**").hasRole("GENERAL")
+            .anyRequest().authenticated()
+        .and()
             .formLogin()
-            .loginPage("/login/general/auth").permitAll()
+            .loginPage("/login/general/auth")
             .loginProcessingUrl("/login/general/process")
             .failureUrl("/")
             .defaultSuccessUrl("/general")
             .usernameParameter("name")
-            .passwordParameter("password");
-            
-        http.antMatcher("/**")
+            .passwordParameter("password")
+        .and()
             .logout()
             .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-            .logoutSuccessUrl("/");
+            .logoutSuccessUrl("/")
+        .and()
+            .csrf().disable();
     }
     
     @Override
