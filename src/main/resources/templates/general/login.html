@@ -5,9 +5,9 @@
     <body>
         <h1>一般ログイン</h1>
         <hr />
-        <form th:action="@{/login/process}" th:method="POST">
-            <input type="hidden" name="name" value="general" />
-            <input type="hidden" name="password" value="general" />
+        <form th:action="@{/login/process}" th:object="${request}" th:method="POST">
+            <input type="hidden" name="name" th:field="*{name}" value="general" />
+            <input type="hidden" name="password" th:field="*{password}" value="general" />
             <input type="submit" value="一般ユーザとしてログイン" />
         </form>
     </body>
