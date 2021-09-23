@@ -13,7 +13,7 @@ public class GeneralController {
         return "general/index";
     }
 
-    @RequestMapping("/login/general")
+    @RequestMapping("/general/login")
     public String login(Model model) {
         model.addAttribute("request", new UserRequest());
         return "general/login";
