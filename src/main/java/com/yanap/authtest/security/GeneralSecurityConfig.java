@@ -30,6 +30,7 @@ public class GeneralSecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/")
                 .usernameParameter("name")
                 .passwordParameter("password")
+                .permitAll()
         .and()
             .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

@@ -30,6 +30,7 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/")
                 .usernameParameter("name")
                 .passwordParameter("password")
+                .permitAll()
         .and()
             .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
