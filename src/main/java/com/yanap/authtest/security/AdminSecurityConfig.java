@@ -36,8 +36,9 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
         .and()
             .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutRequestMatcher(new AntPathRequestMatcher("/admin/logout"))
                 .logoutSuccessUrl("/")
+                .permitAll()
         .and()
             .csrf().disable();
     }

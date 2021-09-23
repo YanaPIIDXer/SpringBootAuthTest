@@ -36,8 +36,9 @@ public class GeneralSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
         .and()
             .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutRequestMatcher(new AntPathRequestMatcher("/general/logout"))
                 .logoutSuccessUrl("/")
+                .permitAll()
         .and()
             .csrf().disable();
     }
